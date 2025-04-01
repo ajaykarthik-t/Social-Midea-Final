@@ -1164,6 +1164,525 @@ def display_text_analysis():
                 - **Specific Details**: Authentic personal experiences
                 """)
 
+# def display_account_analysis():
+#     """Display the account details analysis tab content with enhanced metrics."""
+#     st.markdown('<h2 class="sub-header">Account Details Analysis</h2>', unsafe_allow_html=True)
+    
+#     st.markdown("""
+#     <div class="card">
+#         <h3 style="margin-top: 0;">Social Media Account Analysis</h3>
+#         <p>Enter account metrics to analyze the authenticity based on account characteristics, engagement patterns, and behavioral indicators.</p>
+#     </div>
+#     """, unsafe_allow_html=True)
+    
+#     # Create tabs for different categories of metrics
+#     account_tabs = st.tabs(["Basic Metrics", "Engagement Metrics", "Content Patterns", "Behavioral Indicators"])
+    
+#     with account_tabs[0]:
+#         # Basic account metrics
+#         col1, col2 = st.columns(2)
+        
+#         with col1:
+#             # Account age in days
+#             account_age = st.number_input("Account Age (days)", min_value=0, value=30, step=1)
+            
+#             # Follower count
+#             follower_count = st.number_input("Follower Count", min_value=0, value=500, step=10)
+            
+#             # Following count
+#             following_count = st.number_input("Following Count", min_value=0, value=350, step=10)
+            
+#             # Posts count
+#             post_count = st.number_input("Number of Posts", min_value=0, value=25, step=1)
+            
+#             # Account creation to first post (days)
+#             first_post_delay = st.number_input("Days Before First Post", min_value=0, value=1, step=1,
+#                                             help="Number of days between account creation and first post")
+        
+#         with col2:
+#             # Profile completeness
+#             profile_completeness = st.slider("Profile Completeness (%)", 0, 100, 75, 5,
+#                                            help="How complete the profile information is (bio, picture, links, etc.)")
+            
+#             # Account verification status
+#             is_verified = st.checkbox("Account is Verified", value=False)
+            
+#             # Username characteristics
+#             username_type = st.radio("Username Type", 
+#                                     ["Natural name/word", "With numbers", "Random characters", "With special symbols"],
+#                                     index=0,
+#                                     help="The characteristic pattern of the username")
+            
+#             # Profile has picture
+#             has_profile_pic = st.checkbox("Has Profile Picture", value=True)
+            
+#             # Growth rate - followers gained per month
+#             follower_growth_rate = st.number_input("Monthly Follower Growth", min_value=0, value=50, step=10,
+#                                                 help="Average number of new followers per month")
+    
+#     with account_tabs[1]:
+#         # Engagement metrics
+#         col1, col2 = st.columns(2)
+        
+#         with col1:
+#             # Like count - average per post
+#             avg_likes = st.number_input("Average Likes Per Post", min_value=0, value=45, step=5)
+            
+#             # Comment count - average per post
+#             avg_comments = st.number_input("Average Comments Per Post", min_value=0, value=8, step=1)
+            
+#             # Share/Retweet count - average per post
+#             avg_shares = st.number_input("Average Shares/Retweets Per Post", min_value=0, value=5, step=1)
+            
+#             # Engagement rate (calculated or provided)
+#             engagement_rate = st.number_input("Engagement Rate (%)", min_value=0.0, value=3.5, step=0.1, format="%.1f",
+#                                            help="(Likes + Comments + Shares) / Followers * 100")
+            
+#             # Engagement-to-follower ratio
+#             if avg_likes > 0 and follower_count > 0:
+#                 like_follower_ratio = (avg_likes / follower_count) * 100
+#             else:
+#                 like_follower_ratio = 0
+            
+#             st.metric("Like to Follower Ratio (%)", f"{like_follower_ratio:.2f}%", 
+#                     help="Average likes as percentage of total followers")
+        
+#         with col2:
+#             # Response rate to comments
+#             response_rate = st.slider("Response Rate to Comments (%)", 0, 100, 40, 5,
+#                                     help="How often the account responds to comments on their posts")
+            
+#             # Average response time (hours)
+#             response_time = st.number_input("Average Response Time (hours)", min_value=0.0, value=8.0, step=0.5, format="%.1f",
+#                                          help="How quickly the account typically responds to comments")
+            
+#             # Like distribution
+#             like_variability = st.slider("Like Count Consistency", 1, 10, 7, 1,
+#                                       help="1 = Highly variable, 10 = Very consistent")
+            
+#             # Comment sentiment
+#             comment_sentiment = st.select_slider("Comment Sentiment", 
+#                                               options=["Very Negative", "Negative", "Neutral", "Positive", "Very Positive"],
+#                                               value="Positive",
+#                                               help="Overall sentiment of comments on posts")
+            
+#             # Follower quality score
+#             follower_quality = st.slider("Follower Quality Score", 1, 10, 6, 1,
+#                                       help="1 = Many suspicious followers, 10 = Mostly authentic followers")
+    
+#     with account_tabs[2]:
+#         # Content patterns
+#         col1, col2 = st.columns(2)
+        
+#         with col1:
+#             # Content type distribution
+#             st.subheader("Content Type Distribution (%)")
+#             photo_percent = st.slider("Photos", 0, 100, 60, 5)
+#             video_percent = st.slider("Videos", 0, 100, 20, 5)
+#             text_percent = st.slider("Text-only", 0, 100, 20, 5)
+            
+#             # Posting frequency (posts per week)
+#             posting_frequency = st.number_input("Posting Frequency (per week)", min_value=0.0, value=3.5, step=0.5, format="%.1f")
+            
+#             # Posting time consistency
+#             posting_time_consistency = st.slider("Posting Time Consistency", 1, 10, 6, 1,
+#                                                help="1 = Random times, 10 = Consistent schedule")
+        
+#         with col2:
+#             # Hashtag usage
+#             avg_hashtags = st.number_input("Average Hashtags Per Post", min_value=0, value=5, step=1)
+            
+#             # Mention frequency
+#             avg_mentions = st.number_input("Average @Mentions Per Post", min_value=0, value=2, step=1)
+            
+#             # Content consistency (1-10)
+#             content_consistency = st.slider("Content Theme Consistency", 1, 10, 8, 1,
+#                                           help="How consistent the account's content theme is")
+            
+#             # Caption length
+#             avg_caption_length = st.number_input("Average Caption Length (words)", min_value=0, value=35, step=5)
+            
+#             # Language consistency
+#             language_consistency = st.slider("Language Pattern Consistency", 1, 10, 7, 1,
+#                                            help="How consistent the writing style is across posts")
+    
+#     with account_tabs[3]:
+#         # Behavioral indicators
+#         col1, col2 = st.columns(2)
+        
+#         with col1:
+#             # Geographic consistency
+#             geo_consistency = st.slider("Geographic Location Consistency", 1, 10, 7, 1,
+#                                       help="How consistent are location tags/mentions")
+            
+#             # Device consistency
+#             device_consistency = st.slider("Posting Device Consistency", 1, 10, 8, 1,
+#                                          help="Whether posts come from the same devices/platforms")
+            
+#             # Activity time patterns
+#             activity_pattern = st.select_slider("Activity Time Pattern", 
+#                                              options=["Very Random", "Somewhat Random", "Mixed", "Somewhat Regular", "Very Regular"],
+#                                              value="Somewhat Regular",
+#                                              help="Consistency of posting time patterns")
+            
+#             # Has external links
+#             has_external_links = st.checkbox("Has External Links in Bio", value=True)
+        
+#         with col2:
+#             # Bio-content consistency
+#             bio_content_match = st.slider("Bio-Content Consistency", 1, 10, 8, 1,
+#                                         help="How well the content matches what's described in the bio")
+            
+#             # Active days distribution
+#             weekday_bias = st.selectbox("Active Days Pattern", 
+#                                       ["Mostly weekdays", "Mostly weekends", "Evenly distributed", "Very irregular"],
+#                                       index=2,
+#                                       help="When the account is typically active")
+            
+#             # Comment-to-post ratio
+#             if post_count > 0:
+#                 comments_made = st.number_input("Comments Made on Other Accounts", min_value=0, value=120, step=10)
+#                 comment_post_ratio = comments_made / post_count
+#             else:
+#                 comments_made = st.number_input("Comments Made on Other Accounts", min_value=0, value=0, step=10)
+#                 comment_post_ratio = 0
+                
+#             st.metric("Comment to Post Ratio", f"{comment_post_ratio:.1f}",
+#                     help="Ratio of comments made vs posts created")
+            
+#             # Last activity (days ago)
+#             last_activity = st.number_input("Days Since Last Activity", min_value=0, value=2, step=1,
+#                                           help="Number of days since the last post or comment")
+    
+#     # Analyze button centered
+#     col1, col2, col3 = st.columns([1, 2, 1])
+#     with col2:
+#         analyze_clicked = st.button("Analyze Account", key="analyze_account_btn", use_container_width=True)
+    
+#     # Process the analysis when button clicked
+#     if analyze_clicked:
+#         with st.spinner("Analyzing account metrics..."):
+#             # Add artificial delay for better UX
+#             time.sleep(1.5)
+            
+#             # Get the analysis result with enhanced metrics
+#             result, metrics = analyze_enhanced_account_metrics(
+#                 # Basic metrics
+#                 account_age, follower_count, following_count, post_count, profile_completeness,
+#                 is_verified, username_type, has_profile_pic, follower_growth_rate, first_post_delay,
+                
+#                 # Engagement metrics
+#                 avg_likes, avg_comments, avg_shares, engagement_rate, response_rate,
+#                 response_time, like_variability, comment_sentiment, follower_quality,
+                
+#                 # Content patterns
+#                 posting_frequency, content_consistency, posting_time_consistency,
+#                 avg_hashtags, avg_mentions, language_consistency, avg_caption_length,
+#                 {
+#                     "photos": photo_percent,
+#                     "videos": video_percent,
+#                     "text": text_percent
+#                 },
+                
+#                 # Behavioral indicators
+#                 geo_consistency, device_consistency, activity_pattern, has_external_links,
+#                 bio_content_match, weekday_bias, comment_post_ratio, last_activity
+#             )
+            
+#             # Update session state
+#             st.session_state.account_analyzed = True
+#             st.session_state.account_result = (result, metrics)
+#             st.session_state.analysis_count += 1
+#             st.session_state.total_accounts = st.session_state.get('total_accounts', 0) + 1
+#             st.session_state.total_risk_score = st.session_state.get('total_risk_score', 0) + metrics['risk_score']
+            
+#             if result == "Suspicious":
+#                 st.session_state.fake_detections += 1
+            
+#             # Display the result with appropriate styling
+#             st.markdown("<h3 class='sub-header'>Analysis Result:</h3>", unsafe_allow_html=True)
+            
+#             if result == "Authentic":
+#                 st.markdown(f"<div class='result-real'>✅ LIKELY AUTHENTIC ACCOUNT</div>", unsafe_allow_html=True)
+#             elif result == "Attention":
+#                 st.markdown(f"<div class='result-fake' style='background-color: #FEF3C7; color: #D97706;'>⚠️ REQUIRES ATTENTION</div>", unsafe_allow_html=True)
+#             else:
+#                 st.markdown(f"<div class='result-fake'>⚠️ SUSPICIOUS ACCOUNT DETECTED</div>", unsafe_allow_html=True)
+            
+#             st.markdown(f"<div class='confidence'>Confidence: {metrics['confidence']:.2f}%</div>", unsafe_allow_html=True)
+            
+#             # Display risk score
+#             fig, ax = plt.subplots(figsize=(10, 2))
+            
+#             # Create risk gauge
+#             risk_score = metrics['risk_score']
+#             gauge_colors = ['#10B981', '#FBBF24', '#EF4444']
+#             bar_height = 0.6
+            
+#             # Draw the gauge bar background
+#             ax.barh(0, 100, height=bar_height, color='#e5e7eb')
+            
+#             # Draw the gauge value with appropriate color
+#             if risk_score <= 33:
+#                 color = gauge_colors[0]  # Green for low risk
+#             elif risk_score <= 66:
+#                 color = gauge_colors[1]  # Yellow for medium risk
+#             else:
+#                 color = gauge_colors[2]  # Red for high risk
+            
+#             ax.barh(0, risk_score, height=bar_height, color=color)
+            
+#             # Add marker for threshold
+#             ax.axvline(x=33, color='black', linestyle='--', alpha=0.7)
+#             ax.axvline(x=66, color='black', linestyle='--', alpha=0.7)
+            
+#             # Add labels
+#             ax.text(15, -0.8, "Low Risk", fontsize=10)
+#             ax.text(45, -0.8, "Medium Risk", fontsize=10)
+#             ax.text(80, -0.8, "High Risk", fontsize=10)
+            
+#             # Remove axes
+#             ax.set_ylim(-1, 1)
+#             ax.set_xlim(0, 100)
+#             ax.set_yticks([])
+#             ax.set_xticks([])
+#             ax.spines['top'].set_visible(False)
+#             ax.spines['right'].set_visible(False)
+#             ax.spines['bottom'].set_visible(False)
+#             ax.spines['left'].set_visible(False)
+            
+#             st.pyplot(fig)
+            
+#             # Display metrics summary with tabs for different categories
+#             st.markdown("<h3 class='sub-header'>Detailed Analysis</h3>", unsafe_allow_html=True)
+            
+#             # Create tabs for different categories of analysis
+#             analysis_tabs = st.tabs(["Overview", "Risk Factors", "Authenticity Signals", "Recommendations"])
+            
+#             with analysis_tabs[0]:
+#                 # Display summary metrics
+#                 col1, col2 = st.columns(2)
+                
+#                 with col1:
+#                     # Account summary
+#                     st.markdown("<h4>Account Summary</h4>", unsafe_allow_html=True)
+                    
+#                     account_type = "Personal" if follower_count < 10000 else "Influencer" if follower_count < 100000 else "Brand/Celebrity"
+#                     account_activity = "Very Active" if posting_frequency > 5 else "Active" if posting_frequency > 2 else "Moderate" if posting_frequency > 0.5 else "Low Activity"
+#                     engagement_quality = "Very High" if engagement_rate > 8 else "High" if engagement_rate > 4 else "Moderate" if engagement_rate > 2 else "Low"
+                    
+#                     st.markdown(f"**Account Type:** {account_type}")
+#                     st.markdown(f"**Account Age:** {account_age} days")
+#                     st.markdown(f"**Activity Level:** {account_activity}")
+#                     st.markdown(f"**Engagement Quality:** {engagement_quality}")
+#                     st.markdown(f"**Overall Risk Score:** {risk_score:.1f}/100")
+                
+#                 with col2:
+#                     # Visual summary
+#                     st.markdown("<h4>Key Metrics</h4>", unsafe_allow_html=True)
+                    
+#                     # Create a radar chart for key metrics
+#                     categories = ['Followers', 'Engagement', 'Content\nConsistency', 'Behavior\nPatterns', 'Account\nActivity']
+                    
+#                     # Normalize values to 0-1 scale
+#                     followers_score = min(1.0, follower_count / 10000)  # Scale up to 10K
+#                     engagement_score = min(1.0, engagement_rate / 10)   # Scale up to 10%
+#                     consistency_score = content_consistency / 10
+#                     behavior_score = (geo_consistency + device_consistency) / 20
+#                     activity_score = min(1.0, posting_frequency / 7)    # Scale up to 7 posts/week
+                    
+#                     values = [followers_score, engagement_score, consistency_score, behavior_score, activity_score]
+                    
+#                     # Create radar chart
+#                     fig = plt.figure(figsize=(4, 4))
+#                     ax = fig.add_subplot(111, polar=True)
+                    
+#                     # Plot data
+#                     values_with_closure = values + [values[0]]
+#                     angles = np.linspace(0, 2*np.pi, len(categories), endpoint=False).tolist()
+#                     angles_with_closure = angles + [angles[0]]
+                    
+#                     ax.plot(angles_with_closure, values_with_closure, 'o-', linewidth=2)
+#                     ax.fill(angles_with_closure, values_with_closure, alpha=0.25)
+#                     ax.set_thetagrids(np.degrees(angles), categories)
+#                     ax.set_ylim(0, 1)
+#                     ax.grid(True)
+                    
+#                     st.pyplot(fig)
+            
+#             with analysis_tabs[1]:
+#                 # Risk factors
+#                 st.markdown("<h4>Identified Risk Factors</h4>", unsafe_allow_html=True)
+                
+#                 if metrics['suspicious_indicators']:
+#                     # Create columns for different categories of risk
+#                     col1, col2 = st.columns(2)
+                    
+#                     # Split the indicators into two columns
+#                     indicators = list(metrics['suspicious_indicators'].items())
+#                     half = len(indicators) // 2
+                    
+#                     with col1:
+#                         for key, value in indicators[:half]:
+#                             st.markdown(f"• **{key}:** {value}")
+                    
+#                     with col2:
+#                         for key, value in indicators[half:]:
+#                             st.markdown(f"• **{key}:** {value}")
+                    
+#                     # Add detailed impact explanation
+#                     with st.expander("Impact of Risk Factors", expanded=False):
+#                         st.markdown("""
+#                         Risk factors are patterns or characteristics that correlate with inauthentic accounts. Each factor 
+#                         contributes to the overall risk score, with more severe factors having higher impact. The presence of
+#                         multiple related risk factors indicates a higher probability of a suspicious account.
+#                         """)
+                        
+#                         # Show top 3 factors with detailed explanation
+#                         st.markdown("### Top Impact Factors")
+#                         for i, (key, value) in enumerate(sorted(metrics['suspicious_indicators'].items(), 
+#                                                            key=lambda x: metrics.get('factor_weights', {}).get(x[0], 0), 
+#                                                            reverse=True)[:3]):
+#                             st.markdown(f"**{i+1}. {key}:** {value}")
+#                             factor_explanation = {
+#                                 "Low Engagement": "Extremely low engagement relative to follower count is a strong indicator of purchased followers or bot activity.",
+#                                 "New Account": "Recently created accounts with high follower counts often indicate inauthentic growth.",
+#                                 "Imbalanced Following Ratio": "Accounts following many users with few followers suggests follow-for-follow tactics.",
+#                                 "Few Posts, Many Followers": "High follower counts with minimal content is unusual for organic growth.",
+#                                 "Inconsistent Content": "Rapid shifts in content type or subject can indicate purchased accounts.",
+#                                 "Geographic Inconsistency": "Posts from widely different locations in short timeframes is physically impossible.",
+#                                 "Excessive Posting": "Extremely high posting frequency often indicates automation.",
+#                                 "Incomplete Profile": "Authentic accounts typically complete their profiles.",
+#                                 "Random Username": "Usernames with random characters or excessive numbers correlate with bot accounts.",
+#                                 "Device Inconsistency": "Multiple different posting devices may indicate a shared account."
+#                             }.get(key, "This pattern is commonly associated with inauthentic accounts.")
+                            
+#                             st.markdown(f"*{factor_explanation}*")
+#                 else:
+#                     st.markdown("No significant risk factors identified.")
+            
+#             with analysis_tabs[2]:
+#                 # Authenticity signals
+#                 st.markdown("<h4>Authenticity Indicators</h4>", unsafe_allow_html=True)
+                
+#                 if metrics['positive_indicators']:
+#                     # Create columns for different categories of positive indicators
+#                     col1, col2 = st.columns(2)
+                    
+#                     # Split the indicators into two columns
+#                     indicators = list(metrics['positive_indicators'].items())
+#                     half = len(indicators) // 2
+                    
+#                     with col1:
+#                         for key, value in indicators[:half]:
+#                             st.markdown(f"• **{key}:** {value}")
+                    
+#                     with col2:
+#                         for key, value in indicators[half:]:
+#                             st.markdown(f"• **{key}:** {value}")
+                    
+#                     # Add authenticity score gauge
+#                     authenticity_score = 100 - risk_score
+                    
+#                     # Create gauge chart
+#                     fig, ax = plt.subplots(figsize=(8, 1))
+#                     gauge_colors = ['#EF4444', '#FBBF24', '#10B981']
+#                     bar_height = 0.4
+                    
+#                     # Draw the gauge bar background
+#                     ax.barh(0, 100, height=bar_height, color='#e5e7eb')
+                    
+#                     # Draw the gauge value
+#                     if authenticity_score < 33:
+#                         color = gauge_colors[0]  # Red for low authenticity
+#                     elif authenticity_score < 66:
+#                         color = gauge_colors[1]  # Yellow for medium authenticity
+#                     else:
+#                         color = gauge_colors[2]  # Green for high authenticity
+                    
+#                     ax.barh(0, authenticity_score, height=bar_height, color=color)
+                    
+#                     # Add marker for threshold
+#                     ax.axvline(x=33, color='black', linestyle='--', alpha=0.7)
+#                     ax.axvline(x=66, color='black', linestyle='--', alpha=0.7)
+                    
+#                     # Add labels
+#                     ax.text(10, -0.8, "Low Authenticity", fontsize=9)
+#                     ax.text(40, -0.8, "Medium", fontsize=9)
+#                     ax.text(80, -0.8, "High Authenticity", fontsize=9)
+#                     ax.text(authenticity_score - 5, 0, f"{authenticity_score:.0f}", fontsize=10, va='center', ha='right')
+                    
+#                     # Remove axes
+#                     ax.set_ylim(-1, 1)
+#                     ax.set_xlim(0, 100)
+#                     ax.set_yticks([])
+#                     ax.set_xticks([])
+#                     ax.spines['top'].set_visible(False)
+#                     ax.spines['right'].set_visible(False)
+#                     ax.spines['bottom'].set_visible(False)
+#                     ax.spines['left'].set_visible(False)
+                    
+#                     st.pyplot(fig)
+                    
+#                     # Engagement quality assessment
+#                     st.markdown("#### Engagement Quality Assessment")
+                    
+#                     engagement_quality_score = min(10, max(1, int(10 * (
+#                         (min(1, engagement_rate/10) * 0.4) + 
+#                         (min(1, response_rate/100) * 0.3) + 
+#                         (min(1, follower_quality/10) * 0.3)
+#                     ))))
+                    
+#                     engagement_descriptions = {
+#                         1: "Very poor engagement with potential fake interactions",
+#                         2: "Poor engagement suggesting low quality followers",
+#                         3: "Below average engagement with limited interaction",
+#                         4: "Fair engagement but inconsistent interaction patterns",
+#                         5: "Average engagement typical of authentic accounts",
+#                         6: "Good engagement with active community",
+#                         7: "Strong engagement showing authentic followers",
+#                         8: "Very strong engagement with high-quality interactions",
+#                         9: "Excellent engagement demonstrating loyal following",
+#                         10: "Exceptional engagement typical of highly authentic accounts"
+#                     }
+                    
+#                     st.markdown(f"**Engagement Quality Score: {engagement_quality_score}/10** - *{engagement_descriptions[engagement_quality_score]}*")
+#                 else:
+#                     st.markdown("No significant authenticity indicators identified.")
+            
+#             with analysis_tabs[3]:
+#                 # Recommendations
+#                 st.markdown("<h4>Actionable Recommendations</h4>", unsafe_allow_html=True)
+                
+#                 for rec in metrics['recommendations']:
+#                     st.markdown(f"• {rec}")
+                
+#                 # Display comparison to benchmarks if we have any
+#                 st.markdown("#### Comparison to Industry Benchmarks")
+                
+#                 # Create a comparison table
+#                 benchmark_data = {
+#                     "Metric": ["Engagement Rate", "Posting Frequency", "Follow Ratio", "Follower Growth"],
+#                     "Account": [f"{engagement_rate:.1f}%", f"{posting_frequency:.1f}/week", 
+#                               f"{follower_ratio:.2f}", f"{follower_growth_rate} per month"],
+#                     "Industry Average": ["2.4%", "4.5/week", "0.85", "3% monthly"]
+#                 }
+                
+#                 benchmark_df = pd.DataFrame(benchmark_data)
+#                 st.table(benchmark_df)
+                
+#                 # Add verification steps
+#                 with st.expander("Verification Steps", expanded=False):
+#                     st.markdown("""
+#                     ### Recommended Verification Steps
+                    
+#                     1. **Check content history**: Review older posts for consistency with current content
+#                     2. **Examine follower profiles**: Look for suspicious patterns among followers
+#                     3. **Verify through alternate channels**: Check for presence on other platforms
+#                     4. **Look for engagement patterns**: Authentic accounts have varied engagement
+#                     5. **Analyze comment quality**: Check if comments are generic or specific to content
+#                     """)
+
 def display_account_analysis():
     """Display the account details analysis tab content with enhanced metrics."""
     st.markdown('<h2 class="sub-header">Account Details Analysis</h2>', unsafe_allow_html=True)
@@ -1333,7 +1852,7 @@ def display_account_analysis():
             bio_content_match = st.slider("Bio-Content Consistency", 1, 10, 8, 1,
                                         help="How well the content matches what's described in the bio")
             
-            # Active days distribution
+            # Weekday bias
             weekday_bias = st.selectbox("Active Days Pattern", 
                                       ["Mostly weekdays", "Mostly weekends", "Evenly distributed", "Very irregular"],
                                       index=2,
@@ -1660,6 +2179,9 @@ def display_account_analysis():
                 # Display comparison to benchmarks if we have any
                 st.markdown("#### Comparison to Industry Benchmarks")
                 
+                # Calculate the follower ratio here
+                follower_ratio = follower_count / max(following_count, 1)
+                
                 # Create a comparison table
                 benchmark_data = {
                     "Metric": ["Engagement Rate", "Posting Frequency", "Follow Ratio", "Follower Growth"],
@@ -1682,6 +2204,7 @@ def display_account_analysis():
                     4. **Look for engagement patterns**: Authentic accounts have varied engagement
                     5. **Analyze comment quality**: Check if comments are generic or specific to content
                     """)
+
 
 def analyze_enhanced_account_metrics(
     # Basic metrics
